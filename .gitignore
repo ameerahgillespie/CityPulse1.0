@@ -2,6 +2,7 @@
 .classpath
 .project
 .settings/
+src/main/java/com/jkmsteam/citypulse/GlobalVariables.java
 
 # Intellij
 .idea/
