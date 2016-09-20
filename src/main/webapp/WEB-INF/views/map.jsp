@@ -73,10 +73,24 @@ html, body {
 				position : place.geometry.location
 			});
 
-			google.maps.event.addListener(marker, 'click', function() {
-				infowindow.setContent(place.name);
-				infowindow.open(map, this);
-			});
+			google.maps.event
+					.addListener(
+							marker,
+							'click',
+							function() {
+								var content = "<b>(place.name)</b><br><b>What People Are Saying(Ratings)</b><button id='dead' onclick='saveRating(this);'>Dead: 11</button><button>Just Right: 2</button><button>Jumpin' Jumpin': 5</button><button>Cover Charge: false</button><button>Too Many Dudes: 4</button><button>Too Expensive: 3</button><button>I Can't Hear Myself Think: 1</button><button>Good for Big Groups: 1</button><button>Good Date Night Spot: 1</button><button>Sketchy Neighborhood: 1</button><button>Good Parking Options: 4</button><button onclick='saveRating()'>Check In</button>";
+								infowindow.setContent(content);
+								infowindow.open(map, this);
+							});
+		}
+
+		function saveRating(data) {
+			alert(data.id);
+			submitVote(data.id);
+		}
+
+		function submitVote(data) {
+			//make ajax call to controller sending in parameter
 		}
 	</script>
 </body>
