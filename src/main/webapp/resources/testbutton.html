@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+.button {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 17px;
+    border: 0px solid #ba061e;
+    border-radius: 0px;
+    background: #ff0b38;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff0b38), to(#ba061e));
+    background: -moz-linear-gradient(top, #ff0b38, #ba061e);
+    background: linear-gradient(to bottom, #ff0b38, #ba061e);
+    text-shadow: #6e0412 1px 1px 1px;
+    font: normal normal bold 17px arial;
+    color: #ffffff;
+    text-decoration: none;
+}
+.button:hover,
+.button:focus {
+    border: 0px solid #db0723;
+    background: #ff0d43;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff0d43), to(#df0724));
+    background: -moz-linear-gradient(top, #ff0d43, #df0724);
+    background: linear-gradient(to bottom, #ff0d43, #df0724);
+    color: #ffffff;
+    text-decoration: none;
+}
+.button:active {
+    background: #ba061e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ba061e), to(#ba061e));
+    background: -moz-linear-gradient(top, #ba061e, #ba061e);
+    background: linear-gradient(to bottom, #ba061e, #ba061e);
+}
+.button:after{
+content: " 10" 
+}
+.button:before{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 4px -6px -4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABCUlEQVRIieXUIUsEURTF8R+DiEE2iElEREwiBpPBZPZj2AXxO4j4AYwGoxiMYhIsYthkMm8wbBCDLIZnmBl8DDM7w7Av7WmPe+/5Xw7vPeZFWynN93GTyjzDE4apAMcI+MLyrM0X8V4AAnb7mGRTaifYic57fQBNGuDT//YBl5WeI1xhoQ/gomIe8BjVt6MFHoqFOmsT3zWAkTzSgfxWxbVhMddJtzXmAROs466hPsJBnWFdc7xZNab4PG6ZD9MAY/nVnDTUX7Eif+W9AOfyzD8a4tgoEshwht8mQJvuKwM/OOwyWNLbVP2HTvHSFdBF5X8UcD1L41JrhfkzllIA4K0AJdNqSvM51x/683pA9MKemwAAAABJRU5ErkJggg==") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<ul>
+
+<li><a class="button" href="#">Dead</a></li>
+<li><a class="button" href="#">Just Right</a></li>
+<li><a class="button" href="#">Jumpin' Jumpin'</a></li>
+</ul>
+</body>
+</html>

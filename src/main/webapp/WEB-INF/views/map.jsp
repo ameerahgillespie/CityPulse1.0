@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.jkmsteam.citypulse.*" %>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -23,7 +25,7 @@ html, body {
 	<div id="map"></div>
 	<!-- Replace the value of the key parameter with your own API key. -->
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=DISPLAY_MAP_JS_KEY&libraries=places&callback=initMap"
+		src="https://maps.googleapis.com/maps/api/js?key=<%=GlobalVariables.DISPLAY_MAP_JS_KEY%>&libraries=places&callback=initMap"
 		script defer></script>
 
 	<script>
