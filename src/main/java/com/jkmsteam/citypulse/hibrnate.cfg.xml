@@ -17,7 +17,8 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <!-- Specify session context -->
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
-
+	
+		<mapping class="com.jkmsteam.citypulse.*" />
     </session-factory>
 
 </hibernate-configuration>

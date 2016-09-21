@@ -14,12 +14,14 @@
 $(document).ready(function(){
     $("#centerMap").click(function(){
         setCenterMap(geocoder, map);
+        $("#centerMap").hide(500);
     });
 });
 
 $(document).ready(function(){
     $("#getLocation").click(function(){
-        $("#currentLocation").html('lat: ' + map.getCenter().lat() + ', lng: ' + map.getCenter().lng());
+        $("#currentLocation").html('lat: ' + map.getCenter().lat() + ', lng: ' 
+        		+ map.getCenter().lng() + ', zoom: ' + map.getZoom());
     });
 });
 

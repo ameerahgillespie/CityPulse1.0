@@ -1,28 +1,13 @@
 package com.jkmsteam.citypulse;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="users")
 public class User {
-	
-	@Id @Column(name="id")
 	private int id;
-	
-	@Column(name="email")
 	private String email;
-	
-	@Column(name="first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
 	private String lastName;
-	
-	@Column(name="latitude")
 	private double latitude;
-	
-	@Column(name="longitude")
 	private double longitude;
+	private int zoom;
 	
 	public int getId() {
 		return id;
@@ -59,6 +44,12 @@ public class User {
 	}
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	public int getZoom() {
+		return zoom;
+	}
+	public void setZoom(int zoom) {
+		this.zoom = zoom;
 	}	
 
 }
