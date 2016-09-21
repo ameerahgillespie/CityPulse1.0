@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.jkmsteam.citypulse">
+	<logger name="com.grandcircus.citypulse">
 		<level value="info" />
 	</logger>
 	
