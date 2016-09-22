@@ -1,10 +1,12 @@
-package com.jkmsteam.citypulse;
+package com.jkmsteam.model.dao;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
+import com.jkmsteam.model.dto.Rating;
 
 
 //ALL STATIC METHODS HERE!
@@ -78,4 +80,37 @@ public class RatingsDAO {
 	                          
 	        return ratings;
 	    }
+
+	public static Rating updateRating(Rating rating) {
+		if (factory == null)
+            setupFactory();
+         // Get current session
+         Session hibernateSession = factory.openSession();
+
+         // Begin transaction
+         hibernateSession.getTransaction().begin();
+         
+         //step 1: get current rating from database for this specified bar by ID
+         Rating tempRating = hibernateSession.get(Rating.class, rating.getId());
+         if    (tempRating == null) {
+        	 tempRating = rating;
+        	      			 
+         }
+         
+         //step 2: add/increment count by 1 to the rating "dead"
+         tempRating.setDead(tempRating.getDead() + rating.getDead());
+         
+         //step 3: update database with new value
+         hibernateSession.saveOrUpdate(tempRating);
+         // Commit transaction
+         hibernateSession.getTransaction().commit();
+               
+           hibernateSession.close();  
+		return tempRating;
+	}
+
+	private static Rating rating() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

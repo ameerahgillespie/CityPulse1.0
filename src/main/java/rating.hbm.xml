@@ -3,14 +3,14 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>
-<class name="package com.jkmsteam.citypulse" table="ratings">
+<hibernate-mapping package = "com.jkmsteam.model.dto">
+<class name="Rating" table="ratings">
 <id name="id" column="ID" type="int">
 <generator class="increment"></generator>
 </id>
 <property name="userId" column="user_id" type="int"></property>
 <property name="placeId" column="place_id" type="string"></property>
-<property name="dead" column="dead" type="boolean"></property>
+<property name="dead" column="dead" type="int"></property>
 <property name="justRight" column="just_right" type="boolean"></property>
 <property name="jumping" column="jumping" type="boolean"></property>
 <property name="coverCharge" column="cover_charge" type="boolean"></property>

@@ -1,4 +1,4 @@
-package com.jkmsteam.citypulse;
+package com.jkmsteam.model.dto;
 
 public class User {
 	private int id;

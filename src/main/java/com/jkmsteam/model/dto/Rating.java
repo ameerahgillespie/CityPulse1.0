@@ -1,10 +1,10 @@
-package com.jkmsteam.citypulse;
+package com.jkmsteam.model.dto;
 
 public class Rating {
 	private int id;
 	private int userId;
 	private String placeId;
-	private boolean dead;
+	private int dead;
 	private boolean justRight;
 	private boolean jumping;
 	private boolean coverCharge;
@@ -27,10 +27,16 @@ public class Rating {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public boolean isDead() {
+	public String getPlaceId() {
+		return placeId;
+	}
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
+	}
+	public int getDead() {
 		return dead;
 	}
-	public void setDead(boolean dead) {
+	public void setDead(int dead) {
 		this.dead = dead;
 	}
 	public boolean isJustRight() {
@@ -39,10 +45,10 @@ public class Rating {
 	public void setJustRight(boolean justRight) {
 		this.justRight = justRight;
 	}
-	public boolean isJumpin() {
+	public boolean isJumping() {
 		return jumping;
 	}
-	public void setJumpin(boolean jumping) {
+	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
 	}
 	public boolean isCoverCharge() {
@@ -93,12 +99,5 @@ public class Rating {
 	public void setGoodParking(boolean goodParking) {
 		this.goodParking = goodParking;
 	}
-	public String getPlaceId() {
-		return placeId;
-	}
-	public void setPlaceID(String placeId) {
-		this.placeId = placeId;
-	}
-	
 	
 }
