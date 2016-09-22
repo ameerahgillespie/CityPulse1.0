@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.jkmsteam.citypulse.*" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -15,15 +18,22 @@ html, body {
 #map {
 	height: 100%;
 }
+
 </style>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Pick Your Poison</title>
+<spring:url value="/resources/core/css/bootstrap.min.css"
+	var="bootstrapCss" />
+<link href="${bootstrapCss}" rel="stylesheet" />
+<link href="${coreCss}" rel="stylesheet" />
 </head>
 <body>
+
 	<div id="map"></div>
 	<!-- Replace the value of the key parameter with your own API key. -->
+
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=<%=GlobalVariables.DISPLAY_MAP_JS_KEY%>&libraries=places&callback=initMap"
 		script defer></script>
@@ -32,10 +42,10 @@ html, body {
 		//This example requires the Places library. Include the libraries=places
 		//parameter when you first load the API. For example:
 		//<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
+		var data = JSON.parse('${jsonData}'); 
 		var map;
 		var infowindow;
-
+		// console.log(data);
 		function initMap() {
 			var pyrmont = {
 				lat : 42.335376,
@@ -73,19 +83,28 @@ html, body {
 			var marker = new google.maps.Marker({
 				map : map,
 				position : place.geometry.location
+			
 			});
-
+			var deadRating = 0;
+			if (data[place.id]) {
+				dataRating = data[place.id].dead;
+			}
+console.log(dataRating);
+			var infoContent = place.name + "<button class='btn btn-info'" +
+				"onclick=\"location.href='/citypulse/vote?ratetype=dead&placeId=" + place.id + "'\">dead " + dataRating +"</button>";
+			
 			google.maps.event
 					.addListener(
 							marker,
 							'click',
 							function() {
-								var content = "<b>(place.name)</b><br><b>What People Are Saying(Ratings)</b><button id='dead' onclick='saveRating(this);'>Dead: 11</button><button>Just Right: 2</button><button>Jumpin' Jumpin': 5</button><button>Cover Charge: false</button><button>Too Many Dudes: 4</button><button>Too Expensive: 3</button><button>I Can't Hear Myself Think: 1</button><button>Good for Big Groups: 1</button><button>Good Date Night Spot: 1</button><button>Sketchy Neighborhood: 1</button><button>Good Parking Options: 4</button><button onclick='saveRating()'>Check In</button>";
+								var content = infoContent;
 								infowindow.setContent(content);
 								infowindow.open(map, this);
 							});
 		}
 
+		
 		function saveRating(data) {
 			alert(data.id);
 			submitVote(data.id);

@@ -99,5 +99,12 @@ public class Rating {
 	public void setGoodParking(boolean goodParking) {
 		this.goodParking = goodParking;
 	}
+	@Override
+	public String toString() {
+		return "Rating [id=" + id + ", userId=" + userId + ", placeId=" + placeId + ", dead=" + dead + ", justRight="
+				+ justRight + ", jumping=" + jumping + ", coverCharge=" + coverCharge + ", crowded=" + crowded
+				+ ", expensive=" + expensive + ", loud=" + loud + ", bigGroups=" + bigGroups + ", smallGroups="
+				+ smallGroups + ", safePlace=" + safePlace + ", goodParking=" + goodParking + "]";
+	}
 	
 }

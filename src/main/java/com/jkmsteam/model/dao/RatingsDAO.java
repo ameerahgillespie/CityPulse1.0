@@ -1,5 +1,6 @@
 package com.jkmsteam.model.dao;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -122,5 +123,26 @@ public class RatingsDAO {
 	private static Rating rating() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+/*
+ return hashmap of ratings for all place IDs in database
+ */
+	public static List<Rating> getAllRatings() {
+	       if (factory == null)
+	            setupFactory();
+	         // Get current session
+	         Session hibernateSession = factory.openSession();
+
+	         // Begin transaction
+	         hibernateSession.getTransaction().begin();
+	         
+	         //deprecated method & unsafe cast
+	         List<Rating> ratings = hibernateSession.createQuery("FROM Rating").list(); 
+	         
+	         // Commit transaction
+	         hibernateSession.getTransaction().commit();
+	               
+	         hibernateSession.close();  
+		return ratings;
 	}
 }
