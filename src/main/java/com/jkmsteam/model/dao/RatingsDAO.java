@@ -1,9 +1,12 @@
 package com.jkmsteam.model.dao;
 import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 
 import com.jkmsteam.model.dto.Rating;
@@ -91,15 +94,22 @@ public class RatingsDAO {
          hibernateSession.getTransaction().begin();
          
          //step 1: get current rating from database for this specified bar by ID
-         Rating tempRating = hibernateSession.get(Rating.class, rating.getId());
-         if    (tempRating == null) {
-        	 tempRating = rating;
-        	      			 
+         Criteria cr = hibernateSession.createCriteria(Rating.class);
+         cr.add(Restrictions.eq("placeId", rating.getPlaceId()));
+         List results = cr.list();
+         Rating tempRating;
+		//Rating tempRating = hibernateSession.get(Rating.class, rating.getId());
+         if  (results.isEmpty()) {//if id does not exist do insert
+        	 tempRating = rating;     	      			 
+         }
+         else {//if record does exist do update
+        	 tempRating  = (Rating) results.get(0);
+        	 //step 2: add/increment count by 1 to the rating "dead"
+             tempRating.setDead(tempRating.getDead() + rating.getDead());
+             
          }
          
-         //step 2: add/increment count by 1 to the rating "dead"
-         tempRating.setDead(tempRating.getDead() + rating.getDead());
-         
+        
          //step 3: update database with new value
          hibernateSession.saveOrUpdate(tempRating);
          // Commit transaction
