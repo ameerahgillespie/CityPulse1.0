@@ -1,3 +1,4 @@
+
 package com.jkmsteam.citypulse;
 
 import java.text.DateFormat;

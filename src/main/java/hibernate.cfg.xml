@@ -9,9 +9,9 @@
 
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/citypulsedb</property>
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/webproducts?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
         <property name="hibernate.connection.username">jdbc</property>
-        <property name="hibernate.connection.password">admin</property>
+        <property name="hibernate.connection.password">java123</property>
 
 
         <!-- SQL dialect -->
