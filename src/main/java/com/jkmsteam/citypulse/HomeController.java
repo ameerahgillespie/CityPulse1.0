@@ -1,6 +1,7 @@
 package com.jkmsteam.citypulse;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -50,18 +51,60 @@ public class HomeController {
 		response.addCookie(zoomCookie);
 		
 
-		List<Rating> counts = RatingsDAO.getAllRatings();
-//		List<Rating> counts = RatingsDAO.getAggregateRatings();
+//		List<Rating> counts = RatingsDAO.getAllRatings();
+		List counts = RatingsDAO.getAggregateRatings();
 		logger.info("Aggregate: " + counts);
-		//create hashmap of ratings for all place IDs in database
-		Map <String, Rating> ratingsMap = new HashMap<String, Rating>();
 		
-		for (Rating rating : counts) {
-			ratingsMap.put(rating.getPlaceId(), rating);
-			System.out.println(rating);
+		Object[] maps = new Object[11];
+		Map<String, Long> deadMap = new HashMap<String, Long>();
+		Map<String, Long> justRightMap = new HashMap<String, Long>();
+		Map<String, Long> jumpingMap = new HashMap<String, Long>();
+		Map<String, Long> coverChargeMap = new HashMap<String, Long>();
+		Map<String, Long> crowdedMap = new HashMap<String, Long>();
+		Map<String, Long> expensiveMap = new HashMap<String, Long>();
+		Map<String, Long> loudMap = new HashMap<String, Long>();
+		Map<String, Long> bigGroupsMap = new HashMap<String, Long>();
+		Map<String, Long> smallGroupsMap = new HashMap<String, Long>();
+		Map<String, Long> safePlaceMap = new HashMap<String, Long>();
+		Map<String, Long> goodParkingMap = new HashMap<String, Long>();
+		
+		for (Object rating: counts) {
+			Object[] ratings = (Object[]) rating;
+			deadMap.put((String)ratings[0], (Long)ratings[1]);
+			justRightMap.put((String)ratings[0], (Long)ratings[2]);
+			jumpingMap.put((String)ratings[0], (Long)ratings[3]);
+			coverChargeMap.put((String)ratings[0], (Long)ratings[4]);
+			crowdedMap.put((String)ratings[0], (Long)ratings[5]);
+			expensiveMap.put((String)ratings[0], (Long)ratings[6]);
+			loudMap.put((String)ratings[0], (Long)ratings[7]);
+			bigGroupsMap.put((String)ratings[0], (Long)ratings[8]);
+			smallGroupsMap.put((String)ratings[0], (Long)ratings[9]);
+			safePlaceMap.put((String)ratings[0], (Long)ratings[10]);
+			goodParkingMap.put((String)ratings[0], (Long)ratings[11]);			
 		}
+		maps[0] = deadMap;
+		maps[1] = justRightMap;
+		maps[2] = jumpingMap;
+		maps[3] = coverChargeMap;
+		maps[4] = crowdedMap;
+		maps[5] = expensiveMap;
+		maps[6] = loudMap;
+		maps[7] = bigGroupsMap;
+		maps[8] = smallGroupsMap;
+		maps[9] = safePlaceMap;
+		maps[10] = goodParkingMap;
+
+//		for (Object rating : counts) {
+//		//	ratingsMap.put(rating.getPlaceId(), rating);
+//			Object[] ratings = (Object[]) rating;
+//			System.out.print("placeid: " + ratings[0]);
+//			ratingsMap.put("placeid", (Integer)ratings[0]);
+//			System.out.print("\tdead: " + ratings[1]);
+//			System.out.print("\tjust right: " + ratings[2]);
+//			System.out.println();
+//		}
 		Gson gson = new Gson();
-		String data = gson.toJson(ratingsMap);
+		String data = gson.toJson(maps);
 		System.out.println(data);
 		model.addAttribute("jsonData", data);
 		model.addAttribute("lat", lat);

@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
@@ -87,14 +88,14 @@ public class RatingsDAO {
 	        return ratings;
 	    }
 
-//	 public static List<Rating> getAggregateRatings(){
-//	        if (factory == null)
-//	            setupFactory();
-//	         // Get current session
-//	         Session hibernateSession = factory.openSession();
-//
-//	         // Begin transaction
-//	         hibernateSession.getTransaction().begin();
+	 public static List getAggregateRatings(){
+	        if (factory == null)
+	            setupFactory();
+	         // Get current session
+	         Session hibernateSession = factory.openSession();
+
+	         // Begin transaction
+	         hibernateSession.getTransaction().begin();
 //	         
 //	         //deprecated method & unsafe cast
 //	         String query = "select id, userId, placeId,  sum(dead) as dead, "
@@ -113,13 +114,32 @@ public class RatingsDAO {
 //	        		        .add( Projections.groupProperty("color") )
 //	        		    )
 //	        		    .list();
-//	         // Commit transaction
-//	         hibernateSession.getTransaction().commit();
-//	               
-//	           hibernateSession.close();  
-//	                          
-//	        return ratings;
-//	    }
+	         // Commit transaction
+	         List ratings = hibernateSession.createCriteria(Rating.class)
+	        		 .setProjection(Projections.projectionList()
+	        				// .add(Projections.id(), "id")
+	        				// .add(Projections.property("userId"))
+	        				 .add(Projections.property("placeId"))
+	        				 .add(Projections.sum("dead"), "dead")
+	        				 .add(Projections.sum("justRight"), "justRight")
+	        				 .add(Projections.sum("jumping"), "jumping")
+	        				 .add(Projections.sum("coverCharge"), "coverCharge")
+	        				 .add(Projections.sum("crowded"), "crowded")
+	        				 .add(Projections.sum("expensive"), "expensive")
+	        				 .add(Projections.sum("loud"), "loud")
+	        				 .add(Projections.sum("bigGroups"), "bigGroups")
+	        				 .add(Projections.sum("smallGroups"), "smallGroups")
+	        				 .add(Projections.sum("safePlace"), "safePlace")
+	        				 .add(Projections.sum("goodParking"), "goodParking")
+	        				 .add(Projections.groupProperty("placeId"))
+	        				 ).list();
+	         
+	         hibernateSession.getTransaction().commit();
+	               
+	           hibernateSession.close();  
+	                          
+	        return ratings;
+	    }
 
 	public static Rating updateRating(Rating rating) {
 		if (factory == null)
