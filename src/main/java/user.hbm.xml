@@ -3,14 +3,17 @@
  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
   
- <hibernate-mapping>  
-	 <class name="com.guenther.hibexample.Product" table="groceries">  
-		 <id name="id" column="id" type="int"></id>  
-		 <property name="email" column="email" type="string"></property>  
-		 <property name="firstName" column="first_name" type="string"></property>  
-		 <property name="lastName" column="lastName" type="string"></property>  
-		 <property name="latitude" column="latitude" type="double"></property>  		 
-		 <property name="longitude" column="longitude" type="double"></property>  		 
-		 <property name="zoom" column="zoom" type="int"></property>  		 
+<hibernate-mapping>  
+	<class name="com.jkmsteam.model.dto.User" table="users">  
+		<id name="id" column="id" type="int">		 
+			<generator class="increment"></generator>
+		</id>
+		<property name="fbId" column="fb_id" type="long"></property>  
+		<property name="email" column="email" type="string"></property>  
+		<property name="firstName" column="first_name" type="string"></property>  
+		<property name="lastName" column="last_name" type="string"></property>  
+		<property name="latitude" column="latitude" type="double"></property>  		 
+		<property name="longitude" column="longitude" type="double"></property>  		 
+		<property name="zoom" column="zoom" type="int"></property>  		 
 	 </class>      
- </hibernate-mapping>  
+</hibernate-mapping>  

@@ -8,10 +8,10 @@
     <session-factory>
 
         <!-- Database connection settings -->
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/webproducts?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/citypulsedb?useTimezone=true&amp;serverTimezone=UTC</property>
         <property name="hibernate.connection.username">jdbc</property>
-        <property name="hibernate.connection.password">java123</property>
+        <property name="hibernate.connection.password">admin</property>
 
 
         <!-- SQL dialect -->
@@ -19,7 +19,7 @@
         <!-- Specify session context -->
         <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 	
-		<mapping class="com.jkmsteam.citypulse.*" />
+		<mapping class="com.jkmsteam.model.dto.*" />
     </session-factory>
 
 </hibernate-configuration>

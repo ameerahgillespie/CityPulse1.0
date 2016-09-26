@@ -3,6 +3,8 @@
 .project
 .settings/
 src/main/java/com/jkmsteam/citypulse/GlobalVariables.java
+src/main/java/com/jkmsteam/citypulse/TestController.java
+src/main/webapp/WEB-INF/views/test.jsp
 
 # Intellij
 .idea/

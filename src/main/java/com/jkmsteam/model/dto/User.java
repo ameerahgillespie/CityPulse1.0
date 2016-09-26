@@ -2,6 +2,7 @@ package com.jkmsteam.model.dto;
 
 public class User {
 	private int id;
+	private long fbId;
 	private String email;
 	private String firstName;
 	private String lastName;
@@ -11,6 +12,9 @@ public class User {
 	
 	public int getId() {
 		return id;
+	}
+	public long getFbId() {
+		return fbId;
 	}
 	public String getEmail() {
 		return email;
@@ -29,6 +33,9 @@ public class User {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public void setFbId(long fbId) {
+		this.fbId = fbId;
 	}
 	public void setEmail(String email) {
 		this.email = email;
@@ -50,6 +57,10 @@ public class User {
 	}
 	public void setZoom(int zoom) {
 		this.zoom = zoom;
-	}	
+	}
+	
+	public String toString() {
+		return "id: " + id + ", fbId: " + fbId + ", email: " + email;
+	}
 
 }

@@ -1,4 +1,5 @@
 package com.jkmsteam.model.dao;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 import com.jkmsteam.model.dto.Rating;
@@ -84,6 +86,40 @@ public class RatingsDAO {
 	                          
 	        return ratings;
 	    }
+
+//	 public static List<Rating> getAggregateRatings(){
+//	        if (factory == null)
+//	            setupFactory();
+//	         // Get current session
+//	         Session hibernateSession = factory.openSession();
+//
+//	         // Begin transaction
+//	         hibernateSession.getTransaction().begin();
+//	         
+//	         //deprecated method & unsafe cast
+//	         String query = "select id, userId, placeId,  sum(dead) as dead, "
+//	         		+ "sum(justRight) as justRight, sum(jumping) as jumping, sum(coverCharge) as coverCharge, "
+//	         		+ "sum(crowded) as crowded, sum(expensive) as expensive, sum(loud) as loud, sum(bigGroups) as bigGroups, "
+//	         		+ "sum(smallGroups) as smallGroups, sum(safePlace) as safePlace, sum(goodParking) as goodParking "
+//	         		+ "FROM Rating group by placeId";
+//	         List<Rating> ratings = (List<Rating>)hibernateSession.createQuery(query, Rating.class).getResultList();
+//	         
+//
+//	         List results = session.createCriteria(Cat.class)
+//	        		    .setProjection( Projections.projectionList()
+//	        		        .add( Projections.rowCount() )
+//	        		        .add( Projections.avg("weight") )
+//	        		        .add( Projections.max("weight") )
+//	        		        .add( Projections.groupProperty("color") )
+//	        		    )
+//	        		    .list();
+//	         // Commit transaction
+//	         hibernateSession.getTransaction().commit();
+//	               
+//	           hibernateSession.close();  
+//	                          
+//	        return ratings;
+//	    }
 
 	public static Rating updateRating(Rating rating) {
 		if (factory == null)

@@ -2,29 +2,30 @@ package com.jkmsteam.model.dto;
 
 public class Rating {
 	private int id;
-	private int userId;
+	private long userId;
 	private String placeId;
 	private int dead;
-	private boolean justRight;
-	private boolean jumping;
-	private boolean coverCharge;
-	private boolean crowded;
-	private boolean expensive;
-	private boolean loud;
-	private boolean bigGroups;
-	private boolean smallGroups;
-	private boolean safePlace;
-	private boolean goodParking;
+	private int justRight;
+	private int jumping;
+	private int coverCharge;
+	private int crowded;
+	private int expensive;
+	private int loud;
+	private int bigGroups;
+	private int smallGroups;
+	private int safePlace;
+	private int goodParking;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public String getPlaceId() {
@@ -39,64 +40,64 @@ public class Rating {
 	public void setDead(int dead) {
 		this.dead = dead;
 	}
-	public boolean isJustRight() {
+	public int isJustRight() {
 		return justRight;
 	}
-	public void setJustRight(boolean justRight) {
+	public void setJustRight(int justRight) {
 		this.justRight = justRight;
 	}
-	public boolean isJumping() {
+	public int isJumping() {
 		return jumping;
 	}
-	public void setJumping(boolean jumping) {
+	public void setJumping(int jumping) {
 		this.jumping = jumping;
 	}
-	public boolean isCoverCharge() {
+	public int isCoverCharge() {
 		return coverCharge;
 	}
-	public void setCoverCharge(boolean coverCharge) {
+	public void setCoverCharge(int coverCharge) {
 		this.coverCharge = coverCharge;
 	}
-	public boolean isCrowded() {
+	public int isCrowded() {
 		return crowded;
 	}
-	public void setCrowded(boolean crowded) {
+	public void setCrowded(int crowded) {
 		this.crowded = crowded;
 	}
-	public boolean isExpensive() {
+	public int isExpensive() {
 		return expensive;
 	}
-	public void setExpensive(boolean expensive) {
+	public void setExpensive(int expensive) {
 		this.expensive = expensive;
 	}
-	public boolean isLoud() {
+	public int isLoud() {
 		return loud;
 	}
-	public void setLoud(boolean loud) {
+	public void setLoud(int loud) {
 		this.loud = loud;
 	}
-	public boolean isBigGroups() {
+	public int isBigGroups() {
 		return bigGroups;
 	}
-	public void setBigGroups(boolean bigGroups) {
+	public void setBigGroups(int bigGroups) {
 		this.bigGroups = bigGroups;
 	}
-	public boolean isSmallGroups() {
+	public int isSmallGroups() {
 		return smallGroups;
 	}
-	public void setSmallGroups(boolean smallGroups) {
+	public void setSmallGroups(int smallGroups) {
 		this.smallGroups = smallGroups;
 	}
-	public boolean isSafePlace() {
+	public int isSafePlace() {
 		return safePlace;
 	}
-	public void setSafePlace(boolean safePlace) {
+	public void setSafePlace(int safePlace) {
 		this.safePlace = safePlace;
 	}
-	public boolean isGoodParking() {
+	public int isGoodParking() {
 		return goodParking;
 	}
-	public void setGoodParking(boolean goodParking) {
+	public void setGoodParking(int goodParking) {
 		this.goodParking = goodParking;
 	}
 	@Override

@@ -1,9 +1,11 @@
 @CHARSET "UTF-8";
 
 #map {
-	width: 640px;
-	height: 480px;
-	margin: 0 auto;
+	position: absolute;
+	top: 10px;
+	left: 300px;
+	width: 1000px;
+	height: 620px;
 }
 
 body {
