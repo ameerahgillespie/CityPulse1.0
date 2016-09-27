@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.jkmsteam.citypulse.*" %>
+<%@ page import="com.jkmsteam.citypulse.*"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -33,9 +33,8 @@ html, body {
 	position: absolute;
 	top: 10px;
 	left: 1030px;
-	width: 310px;	
+	width: 310px;
 }
-
 </style>
 
 <head>
@@ -52,37 +51,40 @@ html, body {
 <body>
 
 	<div id="map">
-	<!-- Replace the value of the key parameter with your own API key. -->	
+		<!-- Replace the value of the key parameter with your own API key. -->
 	</div>
-	
+
 	<div id="barInfo">
 		<p id="barName"></p>
 		<p id="barAddress"></p>
 		<p id="barPhone"></p>
 	</div>
-	
+
 	<form action="vote" id="voteForm" method="post">
 		<input type="text" id="currentUser" name="userId" hidden="true">
 		<input type="text" id="currentPlace" name="placeId" hidden="true">
 		<label>What's your overall feeling about this place?<br>
 			<input type="radio" name="overallRate" value="dead"> Dead<br>
-			<input type="radio" name="overallRate" value="justRight" checked> Just Right<br>
-			<input type="radio" name="overallRate" value="jumping"> Jumping Jumping!
+			<input type="radio" name="overallRate" value="justRight" checked>
+			Just Right<br> <input type="radio" name="overallRate"
+			value="jumping"> Jumping Jumping!
 		</label><br>
 		<p>Tell us about your experience with this bar:</p>
-		<input type="checkbox" name="coverCharge" value="1"> This place has cover charge<br>
-		<input type="checkbox" name="crowded" value="1"> This place is crowded<br>
-		<input type="checkbox" name="expensive" value="1"> Prices are too high!<br>
-		<input type="checkbox" name="loud" value="1"> I can't hear my thoughts!<br>
-		<input type="checkbox" name="bigGroups" value="1"> It's good for big groups<br>
-		<input type="checkbox" name="smallGroups" value="1"> It's good for small groups<br>
-		<input type="checkbox" name="safePlace" value="1"> I feel safe here<br>
-		<input type="checkbox" name="goodParking" value="1"> Good parking options<br>
-		
-		<input type="text" id="latForm" name="lat" hidden="true">
-		<input type="text" id="lngForm" name="lng" hidden="true">		
-		<input type="text" id="zoomForm" name="zoom" hidden="true">		
-		
+		<input type="checkbox" name="coverCharge" value="1"> This
+		place has cover charge<br> <input type="checkbox" name="crowded"
+			value="1"> This place is crowded<br> <input
+			type="checkbox" name="expensive" value="1"> Prices are too
+		high!<br> <input type="checkbox" name="loud" value="1"> I
+		can't hear my thoughts!<br> <input type="checkbox"
+			name="bigGroups" value="1"> It's good for big groups<br>
+		<input type="checkbox" name="smallGroups" value="1"> It's good
+		for small groups<br> <input type="checkbox" name="safePlace"
+			value="1"> I feel safe here<br> <input type="checkbox"
+			name="goodParking" value="1"> Good parking options<br> <input
+			type="text" id="latForm" name="lat" hidden="true"> <input
+			type="text" id="lngForm" name="lng" hidden="true"> <input
+			type="text" id="zoomForm" name="zoom" hidden="true">
+
 		<button type="submit">Raaate IT!!!</button>
 	</form>
 
@@ -122,7 +124,22 @@ html, body {
 				center : pyrmont,
 				zoom : ${zoom}
 			});
-
+			
+		      var myLocation = pyrmont; //Sets variable to geo location long and lat co-ordinates.
+				var myPosition = new google.maps.Marker({
+					position : myLocation,
+					icon : {
+						path : google.maps.SymbolPath.CIRCLE,
+						scale : 5
+					},
+					draggable : true,
+					map : map
+				});
+		      
+				var infoWindowLoc = new google.maps.InfoWindow({map: map});
+				infoWindowLoc.setPosition(pyrmont);
+				infoWindowLoc.setContent('You are here');
+			
 			//if we choose to show traffic, use these two lines
 			//var trafficLayer = new google.maps.TrafficLayer();
 			//trafficLayer.setMap(map);
@@ -144,7 +161,6 @@ html, body {
 			}
 		}
 				
-
 		function createMarker(place) {
 			var placeLoc = place.geometry.location;
 			var marker = new google.maps.Marker({
