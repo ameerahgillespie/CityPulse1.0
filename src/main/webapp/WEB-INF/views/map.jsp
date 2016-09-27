@@ -46,7 +46,6 @@ html, body {
 <link href="${coreCss}" rel="stylesheet" />
 <script src="<c:url value="/resources/js/jQuery.js" />"></script>
 
-
 </head>
 <body>
 
@@ -59,8 +58,10 @@ html, body {
 		<p id="barAddress"></p>
 		<p id="barPhone"></p>
 	</div>
-
+	
 	<form action="vote" id="voteForm" method="post">
+		<label id="placeName"></label><br>
+		
 		<input type="text" id="currentUser" name="userId" hidden="true">
 		<input type="text" id="currentPlace" name="placeId" hidden="true">
 		<label>What's your overall feeling about this place?<br>
@@ -91,7 +92,6 @@ html, body {
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=<%=GlobalVariables.DISPLAY_MAP_JS_KEY%>&libraries=places&callback=initMap"
 		script defer></script>
-
 	<script>
 		//This example requires the Places library. Include the libraries=places
 		//parameter when you first load the API. For example:
@@ -214,6 +214,9 @@ html, body {
 								$("#latForm").val(map.getCenter().lat());
 								$("#lngForm").val(map.getCenter().lng());
 								$("#zoomForm").val(map.getZoom());
+								$("#placeName").html(place.name);
+								
+								//console.log("test");
 								var content = infoContent;
 								infowindow.setContent(content);
 								infowindow.open(map, this);
@@ -221,16 +224,15 @@ html, body {
 							});
 		}
 
-		
-		function saveRating(data) {
-			alert(data.id);
-			submitVote(data.id);
-		}
+// 		function saveRating(data) {
+// 			alert(data.id);
+// 			submitVote(data.id);
+// 		}
 
 		    
-		function submitVote(data) {
-			//make ajax call to controller sending in parameter
-		}
+// 		function submitVote(data) {
+// 			//make ajax call to controller sending in parameter
+// 		}
 	</script>
 </body>
 </html>
