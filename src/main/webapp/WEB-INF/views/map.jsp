@@ -47,13 +47,6 @@ html, body {
 <link href="${coreCss}" rel="stylesheet" />
 <script src="<c:url value="/resources/js/jQuery.js" />"></script>
 
-<script>
-// 	$(document).ready(function(){
-// 	    $("#voteForm").hover(function(){
-// 	        $(this).hide(100);
-// 	    });
-// 	});
-</script>
 
 </head>
 <body>
@@ -102,7 +95,20 @@ html, body {
 		//parameter when you first load the API. For example:
 		//<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 		var data = JSON.parse('${jsonData}'); 
-	
+		var deadSet = data[0];
+		var justRightSet = data[1];
+		var jumpingSet = data[2];
+		var coverChargeSet = data[3];
+		var crowdedSet = data[4];
+		var expensiveSet = data[5];
+		var loudSet = data[6];
+		var bigGroupsSet = data[7];
+		var smallGroupsSet = data[8];
+		var safePlaceSet = data[9];
+		var goodParkingSet = data[10]; 
+		console.log("start");
+		console.log(deadSet['somwefin']);
+		console.log(data[0]['51a557fd8b88caaf213178693318af59cc804052']);
 		var map;
 		var infowindow;
 		// console.log(data);
@@ -158,19 +164,17 @@ html, body {
 			var smallGroupsRate = 0;
 			var safePlaceRate = 0;
 			var goodParkingRate = 0;
-			if (data[place.id]) {
-				deadRate = data[place.id].dead;
-				justRightRate = data[place.id].justRight;
-				jumpingRate = data[place.id].jumping;
-				coverChargeRate = data[place.id].coverCharge;
-				crowdedRate = data[place.id].crowded;
-				expensiveRate = data[place.id].expensive;
-				loudRate = data[place.id].loud;
-				bigGroupsRate = data[place.id].smallGroups;
-				smallGroupsRate = data[place.id].justRight;
-				safePlaceRate = data[place.id].safePlace;
-				goodParkingRate = data[place.id].goodParking;
-			}
+			if (deadSet[place.id]) deadRate = deadSet[place.id];
+			if (justRightSet[place.id]) justRightRate = justRightSet[place.id];
+			if (jumpingSet[place.id]) jumpingRate = jumpingSet[place.id];
+			if (coverChargeSet[place.id]) coverChargeRate = coverChargeSet[place.id];
+			if (crowdedSet[place.id]) crowdedRate = crowdedSet[place.id];
+			if (expensiveSet[place.id]) expensiveRate = expensiveSet[place.id];
+			if (loudSet[place.id]) loudRate = loudSet[place.id];
+			if (bigGroupsSet[place.id]) bigGroupsRate = bigGroupsSet[place.id];
+			if (smallGroupsSet[place.id]) smallGroupsRate = smallGroupsSet[place.id];
+			if (safePlaceSet[place.id]) safePlaceRate = safePlaceSet[place.id];
+			if (goodParkingSet[place.id]) goodParkingRate = goodParkingSet[place.id];
 //console.log(dataRating);
 			var infoContent = place.name + "<br>" 
 					+ "Rating of this place:<br>"

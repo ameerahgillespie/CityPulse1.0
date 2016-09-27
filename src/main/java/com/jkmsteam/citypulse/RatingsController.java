@@ -106,21 +106,53 @@ public class RatingsController {
 		rating.setSmallGroups(smallGroups);
 		rating.setSafePlace(safePlace);
 		rating.setGoodParking(goodParking);
-		
-		logger.info("this specific rating: " + rating.toString());
+
 		RatingsDAO.addRating(rating);
-		//model.addAttribute(rating);
-		List<Rating> counts = RatingsDAO.getAllRatings();
+
+		List counts = RatingsDAO.getAggregateRatings();
+		logger.info("Aggregate: " + counts);
 		
-		//create hashmap of ratings for all place IDs in database
-		Map <String, Rating> ratingsMap = new HashMap<String, Rating>();
+		Object[] maps = new Object[11];
+		Map<String, Long> deadMap = new HashMap<String, Long>();
+		Map<String, Long> justRightMap = new HashMap<String, Long>();
+		Map<String, Long> jumpingMap = new HashMap<String, Long>();
+		Map<String, Long> coverChargeMap = new HashMap<String, Long>();
+		Map<String, Long> crowdedMap = new HashMap<String, Long>();
+		Map<String, Long> expensiveMap = new HashMap<String, Long>();
+		Map<String, Long> loudMap = new HashMap<String, Long>();
+		Map<String, Long> bigGroupsMap = new HashMap<String, Long>();
+		Map<String, Long> smallGroupsMap = new HashMap<String, Long>();
+		Map<String, Long> safePlaceMap = new HashMap<String, Long>();
+		Map<String, Long> goodParkingMap = new HashMap<String, Long>();
 		
-		for (Rating ratingAll : counts) {
-			ratingsMap.put(ratingAll.getPlaceId(), ratingAll);
-			//System.out.println(rating);
+		for (Object rating1: counts) {
+			Object[] ratings = (Object[]) rating1;
+			deadMap.put((String)ratings[0], (Long)ratings[1]);
+			justRightMap.put((String)ratings[0], (Long)ratings[2]);
+			jumpingMap.put((String)ratings[0], (Long)ratings[3]);
+			coverChargeMap.put((String)ratings[0], (Long)ratings[4]);
+			crowdedMap.put((String)ratings[0], (Long)ratings[5]);
+			expensiveMap.put((String)ratings[0], (Long)ratings[6]);
+			loudMap.put((String)ratings[0], (Long)ratings[7]);
+			bigGroupsMap.put((String)ratings[0], (Long)ratings[8]);
+			smallGroupsMap.put((String)ratings[0], (Long)ratings[9]);
+			safePlaceMap.put((String)ratings[0], (Long)ratings[10]);
+			goodParkingMap.put((String)ratings[0], (Long)ratings[11]);			
 		}
+		maps[0] = deadMap;
+		maps[1] = justRightMap;
+		maps[2] = jumpingMap;
+		maps[3] = coverChargeMap;
+		maps[4] = crowdedMap;
+		maps[5] = expensiveMap;
+		maps[6] = loudMap;
+		maps[7] = bigGroupsMap;
+		maps[8] = smallGroupsMap;
+		maps[9] = safePlaceMap;
+		maps[10] = goodParkingMap;
+
 		Gson gson = new Gson();
-		String data = gson.toJson(ratingsMap);
+		String data = gson.toJson(maps);
 		System.out.println(data);
 		model.addAttribute("jsonData", data);
 		model.addAttribute("lat", lat);
@@ -129,6 +161,28 @@ public class RatingsController {
 		model.addAttribute("userId", userId);
 
 		return "map";
+
+//		logger.info("this specific rating: " + rating.toString());
+//		//model.addAttribute(rating);
+//		List<Rating> counts = RatingsDAO.getAllRatings();
+//		
+//		//create hashmap of ratings for all place IDs in database
+//		Map <String, Rating> ratingsMap = new HashMap<String, Rating>();
+//		
+//		for (Rating ratingAll : counts) {
+//			ratingsMap.put(ratingAll.getPlaceId(), ratingAll);
+//			//System.out.println(rating);
+//		}
+//		Gson gson = new Gson();
+//		String data = gson.toJson(ratingsMap);
+//		System.out.println(data);
+//		model.addAttribute("jsonData", data);
+//		model.addAttribute("lat", lat);
+//		model.addAttribute("lng", lng);
+//		model.addAttribute("zoom", zoom);
+//		model.addAttribute("userId", userId);
+//
+//		return "map";
 	}
 
 }

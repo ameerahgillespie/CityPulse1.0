@@ -35,7 +35,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(@RequestParam("lat") Double lat,
+	public String home (@RequestParam("lat") Double lat,
 				@RequestParam("lng") Double lng,
 				@RequestParam("zoom") Integer zoom,
 				@RequestParam("userId") long userId,
@@ -94,15 +94,6 @@ public class HomeController {
 		maps[9] = safePlaceMap;
 		maps[10] = goodParkingMap;
 
-//		for (Object rating : counts) {
-//		//	ratingsMap.put(rating.getPlaceId(), rating);
-//			Object[] ratings = (Object[]) rating;
-//			System.out.print("placeid: " + ratings[0]);
-//			ratingsMap.put("placeid", (Integer)ratings[0]);
-//			System.out.print("\tdead: " + ratings[1]);
-//			System.out.print("\tjust right: " + ratings[2]);
-//			System.out.println();
-//		}
 		Gson gson = new Gson();
 		String data = gson.toJson(maps);
 		System.out.println(data);
