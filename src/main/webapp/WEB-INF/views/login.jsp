@@ -15,19 +15,6 @@
 <script src="<c:url value="/resources/js/jQuery.js" />"></script>
 <script>
 $(document).ready(function(){
-    $("#centerMap").click(function(){
-        setCenterMap(geocoder, map);
-    });
-});
-
-$(document).ready(function(){
-    $("#getLocation").click(function(){
-        $("#currentLocation").html('lat: ' + map.getCenter().lat() + ', lng: ' 
-        		+ map.getCenter().lng() + ', zoom: ' + map.getZoom());
-    });
-});
-
-$(document).ready(function(){
     $("#map").mouseup(function(){
 		$("#formLatitude").val(map.getCenter().lat());
     	$("#formLongitude").val(map.getCenter().lng());
@@ -76,7 +63,8 @@ function setCenterMap(geocoder, resultsMap) {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
     	$("#status").html("Please log into Facebook.");
-    	$("#saveUserForm").hide(500);
+    	$("#saveButton").hide(500);
+    	$("#welcomeMessage").hide(500);
     }
   }
   // This function is called when someone finishes with the Login
@@ -121,7 +109,8 @@ function setCenterMap(geocoder, resultsMap) {
     	$("#formLatitude").val(map.getCenter().lat());
     	$("#formLongitude").val(map.getCenter().lng());
     	$("#formZoom").val(map.getZoom());
-    	$("#saveUserForm").show(500);
+    	$("#saveButton").show(500);
+    	$("#welcomeMessage").show(500);
       console.log('Successful login for: ' + response.email);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.first_name + '!';
@@ -139,30 +128,16 @@ function setCenterMap(geocoder, resultsMap) {
 
 <div id="status"></div>
 
-<button id="centerMap">center map</button>
-<button id="getLocation">show location</button>
-
-<%-- <form action="/login" method="post"> --%>
-<!-- 	<button id="addUser">save</button> -->
-<!-- 	<input type="hidden" id="user"> -->
-<%-- </form> --%>
-<form:form method="post" modelAttribute="userForm" action="${login}" id="saveUserForm" hidden="true">
-	Facebook ID:
-	<form:input path="fbId" id="formFbId" type="text" readonly="true"/><br>
-	Email:
-	<form:input path="email" id="formEmail" type="text" readonly="true"/><br>
-	First Name:
-	<form:input path="firstName" id="formFirstName" type="text" readonly="true"/><br>
-	Last Name:
-	<form:input path="lastName" id="formLastName" type="text" readonly="true"/><br>
-	Latitude:
-	<form:input path="latitude" id="formLatitude" type="text" readonly="true"/><br>
-	Longitude:
-	<form:input path="longitude" id="formLongitude" type="text" readonly="true"/><br>
-	Zoom value:
-	<form:input path="zoom" id="formZoom" type="text" readonly="true"/><br>
-	Select location on the map where you want <br>to search for bars and press the button<br>
-	<form:button type="submit" id="saveButton">Save and continue</form:button>
+<form:form method="post" modelAttribute="userForm" action="${login}" id="saveUserForm">
+	<p id="welcomeMessage">Select location on the map where you want <br>to search for bars and press the button<br></p>
+	<form:button type="submit" id="saveButton" hidden="true">Save and continue</form:button>
+	<form:input path="fbId" id="formFbId" type="text" readonly="true" hidden="true"/><br>
+	<form:input path="email" id="formEmail" type="text" readonly="true" hidden="true"/><br>
+	<form:input path="firstName" id="formFirstName" type="text" readonly="true" hidden="true"/><br>
+	<form:input path="lastName" id="formLastName" type="text" readonly="true" hidden="true"/><br>
+	<form:input path="latitude" id="formLatitude" type="text" readonly="true" hidden="true"/><br>
+	<form:input path="longitude" id="formLongitude" type="text" readonly="true" hidden="true"/><br>
+	<form:input path="zoom" id="formZoom" type="text" readonly="true" hidden="true"/><br>
 </form:form>
 
 <p id="currentLocation"></p>

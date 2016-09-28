@@ -50,8 +50,6 @@ public class HomeController {
 		Cookie zoomCookie = new Cookie("zoom", zoom.toString());
 		response.addCookie(zoomCookie);
 		
-
-//		List<Rating> counts = RatingsDAO.getAllRatings();
 		List counts = RatingsDAO.getAggregateRatings();
 		logger.info("Aggregate: " + counts);
 		
@@ -105,5 +103,4 @@ public class HomeController {
 
 		return "map";
 	}
-
 }

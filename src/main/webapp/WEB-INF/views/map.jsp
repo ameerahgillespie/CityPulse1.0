@@ -49,11 +49,22 @@ html, body {
 </head>
 <body>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=326766364336305";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
 	<div id="map">
 		<!-- Replace the value of the key parameter with your own API key. -->
 	</div>
 
 	<div id="barInfo">
+		<div class="fb-share-button" data-href="http://localhost:8080/citypulse/login" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcitypulse%2Flogin&amp;src=sdkpreparse">Share</a></div>
 		<p id="barName"></p>
 		<p id="barAddress"></p>
 		<p id="barPhone"></p>
@@ -93,9 +104,6 @@ html, body {
 		src="https://maps.googleapis.com/maps/api/js?key=<%=GlobalVariables.DISPLAY_MAP_JS_KEY%>&libraries=places&callback=initMap"
 		script defer></script>
 	<script>
-		//This example requires the Places library. Include the libraries=places
-		//parameter when you first load the API. For example:
-		//<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 		var data = JSON.parse('${jsonData}'); 
 		var deadSet = data[0];
 		var justRightSet = data[1];
@@ -108,12 +116,10 @@ html, body {
 		var smallGroupsSet = data[8];
 		var safePlaceSet = data[9];
 		var goodParkingSet = data[10]; 
-		console.log("start");
-		console.log(deadSet['somwefin']);
-		console.log(data[0]['51a557fd8b88caaf213178693318af59cc804052']);
+// 		console.log("start");
+// 		console.log(data[0].['51a557fd8b88caaf213178693318af59cc804052']);
 		var map;
 		var infowindow;
-		// console.log(data);
 	
 		function initMap() {
 			var pyrmont = {
@@ -140,10 +146,6 @@ html, body {
 				infoWindowLoc.setPosition(pyrmont);
 				infoWindowLoc.setContent('You are here');
 			
-			//if we choose to show traffic, use these two lines
-			//var trafficLayer = new google.maps.TrafficLayer();
-			//trafficLayer.setMap(map);
-
 			infowindow = new google.maps.InfoWindow();
 			var service = new google.maps.places.PlacesService(map);
 			service.nearbySearch({
@@ -219,20 +221,9 @@ html, body {
 								//console.log("test");
 								var content = infoContent;
 								infowindow.setContent(content);
-								infowindow.open(map, this);
-								
+								infowindow.open(map, this);								
 							});
 		}
-
-// 		function saveRating(data) {
-// 			alert(data.id);
-// 			submitVote(data.id);
-// 		}
-
-		    
-// 		function submitVote(data) {
-// 			//make ajax call to controller sending in parameter
-// 		}
 	</script>
 </body>
 </html>

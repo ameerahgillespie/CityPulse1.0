@@ -15,12 +15,6 @@ import org.hibernate.service.ServiceRegistry;
 
 import com.jkmsteam.model.dto.Rating;
 
-
-//ALL STATIC METHODS HERE!
-//write a data access object (DOA) with static methods (STATIC) to do the database functions you want. 
-//Note that hibernate users a query language distinct from SQL - 
-//Look up how to do specific tasks you want
-//Reference you hibernate configuration XML files for POJOs properly.
 public class RatingsDAO {
 	private static SessionFactory factory;
 	
@@ -45,7 +39,6 @@ public class RatingsDAO {
 
 		 // Create session factory instance
 		 factory = configuration.buildSessionFactory(serviceRegistry);
-
 	}
 	
 	public static int addRating(Rating r) {
@@ -64,7 +57,7 @@ public class RatingsDAO {
 		 hibernateSession.getTransaction().commit();
 		 
 		 hibernateSession.close();  
-				    
+
 		 return i;  
 	}
 	
@@ -96,25 +89,7 @@ public class RatingsDAO {
 
 	         // Begin transaction
 	         hibernateSession.getTransaction().begin();
-//	         
-//	         //deprecated method & unsafe cast
-//	         String query = "select id, userId, placeId,  sum(dead) as dead, "
-//	         		+ "sum(justRight) as justRight, sum(jumping) as jumping, sum(coverCharge) as coverCharge, "
-//	         		+ "sum(crowded) as crowded, sum(expensive) as expensive, sum(loud) as loud, sum(bigGroups) as bigGroups, "
-//	         		+ "sum(smallGroups) as smallGroups, sum(safePlace) as safePlace, sum(goodParking) as goodParking "
-//	         		+ "FROM Rating group by placeId";
-//	         List<Rating> ratings = (List<Rating>)hibernateSession.createQuery(query, Rating.class).getResultList();
-//	         
-//
-//	         List results = session.createCriteria(Cat.class)
-//	        		    .setProjection( Projections.projectionList()
-//	        		        .add( Projections.rowCount() )
-//	        		        .add( Projections.avg("weight") )
-//	        		        .add( Projections.max("weight") )
-//	        		        .add( Projections.groupProperty("color") )
-//	        		    )
-//	        		    .list();
-	         // Commit transaction
+
 	         List ratings = hibernateSession.createCriteria(Rating.class)
 	        		 .setProjection(Projections.projectionList()
 	        				// .add(Projections.id(), "id")
@@ -134,71 +109,11 @@ public class RatingsDAO {
 	        				 .add(Projections.groupProperty("placeId"))
 	        				 ).list();
 	         
-	         hibernateSession.getTransaction().commit();
-	               
-	           hibernateSession.close();  
-	                          
-	        return ratings;
-	    }
-
-	public static Rating updateRating(Rating rating) {
-		if (factory == null)
-            setupFactory();
-         // Get current session
-         Session hibernateSession = factory.openSession();
-
-         // Begin transaction
-         hibernateSession.getTransaction().begin();
-         
-         //step 1: get current rating from database for this specified bar by ID
-         Criteria cr = hibernateSession.createCriteria(Rating.class);
-         cr.add(Restrictions.eq("placeId", rating.getPlaceId()));
-         List results = cr.list();
-         Rating tempRating;
-		//Rating tempRating = hibernateSession.get(Rating.class, rating.getId());
-         if  (results.isEmpty()) {//if id does not exist do insert
-        	 tempRating = rating;     	      			 
-         }
-         else {//if record does exist do update
-        	 tempRating  = (Rating) results.get(0);
-        	 //step 2: add/increment count by 1 to the rating "dead"
-             tempRating.setDead(tempRating.getDead() + rating.getDead());
-             
-         }
-         
-        
-         //step 3: update database with new value
-         hibernateSession.saveOrUpdate(tempRating);
-         // Commit transaction
-         hibernateSession.getTransaction().commit();
-               
-           hibernateSession.close();  
-		return tempRating;
-	}
-
-	private static Rating rating() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-/*
- return hashmap of ratings for all place IDs in database
- */
-	public static List<Rating> getAllRatings() {
-	       if (factory == null)
-	            setupFactory();
-	         // Get current session
-	         Session hibernateSession = factory.openSession();
-
-	         // Begin transaction
-	         hibernateSession.getTransaction().begin();
-	         
-	         //deprecated method & unsafe cast
-	         List<Rating> ratings = hibernateSession.createQuery("FROM Rating").list(); 
-	         
 	         // Commit transaction
 	         hibernateSession.getTransaction().commit();
 	               
 	         hibernateSession.close();  
-		return ratings;
-	}
+	                          
+	        return ratings;
+	    }
 }

@@ -26,42 +26,7 @@ import com.jkmsteam.model.dto.Rating;
 @Controller
 public class RatingsController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RatingsController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/rating", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-			return "ratingsform";
-	}
-//	@RequestMapping(value = "/vote", method = RequestMethod.GET)
-//	public String addRating(@RequestParam("ratetype") String ratetype, @RequestParam("placeId") String placeId, Model model) {
-//		
-//		logger.info("Rate your experience " + ratetype);
-//		Rating rating = new Rating ();
-//		rating.setDead(1);
-//		rating.setPlaceId(placeId);
-//		rating = RatingsDAO.updateRating(rating);
-//		//model.addAttribute(rating);
-//		logger.info("Total count" + ratetype);
-//	List<Rating> counts = RatingsDAO.getAllRatings();
-//		
-//		//create hashmap of ratings for all place IDs in database
-//		Map <String, Rating> ratingsMap = new HashMap<String, Rating>();
-//		
-//		for (Rating ratingAll : counts) {
-//			ratingsMap.put(ratingAll.getPlaceId(), ratingAll);
-//			//System.out.println(rating)
-//		}
-//		Gson gson = new Gson();
-//		String data = gson.toJson(ratingsMap);
-//		System.out.println(data);
-//		model.addAttribute("jsonData", data); 
-//		return "map";
-//	}
+	private static final Logger logger = LoggerFactory.getLogger(RatingsController.class);	
 	
 	@RequestMapping(value = "/vote", method = RequestMethod.POST)
 	public String addVote(
@@ -79,9 +44,7 @@ public class RatingsController {
 			@RequestParam("lat") double lat,
 			@RequestParam("lng") double lng,
 			@RequestParam("zoom") int zoom,
-			Model model) {
-		
-//		logger.info("userId: " + userId + "placeId");
+			Model model) {		
 		Rating rating = new Rating();
 		rating.setUserId(userId);
 		rating.setPlaceId(placeId);
@@ -110,7 +73,7 @@ public class RatingsController {
 		RatingsDAO.addRating(rating);
 
 		List counts = RatingsDAO.getAggregateRatings();
-		logger.info("Aggregate: " + counts);
+//		logger.info("Aggregate: " + counts);
 		
 		Object[] maps = new Object[11];
 		Map<String, Long> deadMap = new HashMap<String, Long>();
@@ -161,28 +124,5 @@ public class RatingsController {
 		model.addAttribute("userId", userId);
 
 		return "map";
-
-//		logger.info("this specific rating: " + rating.toString());
-//		//model.addAttribute(rating);
-//		List<Rating> counts = RatingsDAO.getAllRatings();
-//		
-//		//create hashmap of ratings for all place IDs in database
-//		Map <String, Rating> ratingsMap = new HashMap<String, Rating>();
-//		
-//		for (Rating ratingAll : counts) {
-//			ratingsMap.put(ratingAll.getPlaceId(), ratingAll);
-//			//System.out.println(rating);
-//		}
-//		Gson gson = new Gson();
-//		String data = gson.toJson(ratingsMap);
-//		System.out.println(data);
-//		model.addAttribute("jsonData", data);
-//		model.addAttribute("lat", lat);
-//		model.addAttribute("lng", lng);
-//		model.addAttribute("zoom", zoom);
-//		model.addAttribute("userId", userId);
-//
-//		return "map";
 	}
-
 }
