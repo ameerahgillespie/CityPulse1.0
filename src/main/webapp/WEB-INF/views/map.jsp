@@ -84,7 +84,7 @@ html, body {
 		<p>Tell us about your experience with this bar:</p>
 		<input type="checkbox" name="coverCharge" value="1"> This
 		place has cover charge<br> <input type="checkbox" name="crowded"
-			value="1"> This place is crowded<br> <input
+			value="1"> Too many dudes!<br> <input
 			type="checkbox" name="expensive" value="1"> Prices are too
 		high!<br> <input type="checkbox" name="loud" value="1"> I
 		can't hear my thoughts!<br> <input type="checkbox"
@@ -139,7 +139,8 @@ html, body {
 						scale : 5
 					},
 					draggable : true,
-					map : map
+					map : map,
+					title: "You are here"
 				});
 		      
 				var infoWindowLoc = new google.maps.InfoWindow({map: map});
@@ -162,13 +163,19 @@ html, body {
 				}
 			}
 		}
-				
-		function createMarker(place) {
+
+		function createMarker(place) {				
+		    var pinColor = "b8b8b8";
+		    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+		    new google.maps.Size(21, 34),
+	        new google.maps.Point(0,0),
+	        new google.maps.Point(10, 34));
+
 			var placeLoc = place.geometry.location;
 			var marker = new google.maps.Marker({
 				map : map,
-				position : place.geometry.location
-			
+				position : place.geometry.location,
+				icon: pinImage
 			});
 						
 			var deadRate = 0;
@@ -193,12 +200,35 @@ html, body {
 			if (smallGroupsSet[place.id]) smallGroupsRate = smallGroupsSet[place.id];
 			if (safePlaceSet[place.id]) safePlaceRate = safePlaceSet[place.id];
 			if (goodParkingSet[place.id]) goodParkingRate = goodParkingSet[place.id];
+			
+			if(deadRate > justRightRate && deadRate > jumpingRate) {
+				var pinColorD = "737aff";
+			    var pinImageD = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorD,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageD);
+			} else if(justRightRate > deadRate && justRightRate > jumpingRate) {
+				var pinColorR = "ff3030";
+			    var pinImageR = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorR,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageR);				
+			} else if(jumpingRate > deadRate && jumpingRate > justRightRate) {
+				var pinColorJ = "ff0000";
+			    var pinImageJ = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorJ,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageJ);
+				marker.setAnimation(google.maps.Animation.BOUNCE);			}
 //console.log(dataRating);
 			var infoContent = place.name + "<br>" 
 					+ "Rating of this place:<br>"
 					+ "Dead: " + deadRate + "  Just Right: " + justRightRate + "  Jumping Jumping!: " + jumpingRate + "<br>"
 					+ "Has cover charge: " + coverChargeRate + "<br>"
-					+ "It's too crowded: " + crowdedRate + "<br>"
+					+ "Too many dudes!: " + crowdedRate + "<br>"
 					+ "Prices are way too high!: " + expensiveRate + "<br>"
 					+ "I can't hear my thoughts!: " + loudRate + "<br>"
 					+ "Good for big groups: " + bigGroupsRate + "<br>"
