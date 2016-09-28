@@ -139,7 +139,8 @@ html, body {
 						scale : 5
 					},
 					draggable : true,
-					map : map
+					map : map,
+					title: "You are here"
 				});
 		      
 				var infoWindowLoc = new google.maps.InfoWindow({map: map});
@@ -162,13 +163,19 @@ html, body {
 				}
 			}
 		}
-				
-		function createMarker(place) {
+
+		function createMarker(place) {				
+		    var pinColor = "8d8f8f";
+		    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+		    new google.maps.Size(21, 34),
+	        new google.maps.Point(0,0),
+	        new google.maps.Point(10, 34));
+
 			var placeLoc = place.geometry.location;
 			var marker = new google.maps.Marker({
 				map : map,
-				position : place.geometry.location
-			
+				position : place.geometry.location,
+				icon: pinImage
 			});
 						
 			var deadRate = 0;
@@ -193,6 +200,29 @@ html, body {
 			if (smallGroupsSet[place.id]) smallGroupsRate = smallGroupsSet[place.id];
 			if (safePlaceSet[place.id]) safePlaceRate = safePlaceSet[place.id];
 			if (goodParkingSet[place.id]) goodParkingRate = goodParkingSet[place.id];
+			
+			if(deadRate > justRightRate && deadRate > jumpingRate) {
+				var pinColorD = "737aff";
+			    var pinImageD = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorD,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageD);
+			} else if(justRightRate > deadRate && justRightRate > jumpingRate) {
+				var pinColorR = "ff7f7f";
+			    var pinImageR = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorR,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageR);				
+			} else if(jumpingRate > deadRate && jumpingRate > justRightRate) {
+				var pinColorJ = "ff0000";
+			    var pinImageJ = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorJ,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageJ);
+				marker.setAnimation(google.maps.Animation.BOUNCE);			}
 //console.log(dataRating);
 			var infoContent = place.name + "<br>" 
 					+ "Rating of this place:<br>"
