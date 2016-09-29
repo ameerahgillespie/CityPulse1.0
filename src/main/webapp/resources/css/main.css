@@ -3,13 +3,66 @@
 @CHARSET "UTF-8";
 
 #map {
-	position: absolute;
-	top: 10px;
-	left: 300px;
-	width: 1000px;
-	height: 620px;
-	 
+position: absolute;
+height: 80vh;
+width: 65vw;
+margin-left: auto;
+margin-right: auto;
+z-index: -1;
+right: 400px; 
 }
+
+/* #loginButton, #saveButton {
+display: inline-block;
+float: right;
+width: 15%;
+padding: 10px;
+}
+ */
+
+.FB{
+	display: inline-block;
+	float: right;
+	margin-top: 100px;
+	margin-right: 20px;
+	
+}
+
+
+
+
+ h1 {
+text-align: center;
+font-weight: 700;
+text-transform: uppercase;
+margin-top: 0;
+margin-bottom: 0;
+font-size: 30px;
+}
+
+
+h2 {
+font-weight: 300;
+text-align: center;
+font-size: 20px;
+margin-bottom: 50px;
+}
+
+body {
+font-family: 'Raleway', sans-serif;
+font-weight: 400;
+color: #222;
+background-color: #f4f5f5;
+position: relative;
+right: 0;
+margin: 0;
+}
+
+
+/* #saveUserForm, #welcomeMessage {
+display: inline-block;
+ float: right;
+} */
 
 body {
 font-family: 'Raleway', sans-serif;
@@ -34,3 +87,21 @@ table, th, td {
 	margin: 10px 0;
 }
 
+
+
+/* 
+
+@media (min-width: 400px) {}
+
+Larger than phablet
+@media (min-width: 550px) {}
+
+Larger than tablet
+@media (min-width: 750px) {}
+
+Larger than desktop
+@media (min-width: 1000px) {}
+
+Larger than Desktop HD
+@media (min-width: 1200px) {}
+ */

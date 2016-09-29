@@ -129,12 +129,19 @@ table, th, td {
 	var="bootstrapCss" />
 <link href="${bootstrapCss}" rel="stylesheet" />
 <link href="${coreCss}" rel="stylesheet" />
-<%-- <script src="<c:url value="/resources/js/jQuery.js" />"></script>
+
+<!--BOOTSTRAP LINKS  -->
+ <script src="<c:url value="/resources/js/jQuery.js" />"></script>
         <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-                rel="stylesheet"> --%>
+                rel="stylesheet">
 </head>
 
 <body>
+
+<!--BOOTSTRAP -->
+<div class="container">
+<div class="row">
+
 
 <h1> Welcome to City Pulse</h1>
 <h2>some cool short subtitle here</h2>
@@ -150,10 +157,14 @@ table, th, td {
 }(document, 'script', 'facebook-jssdk'));
 </script>
 
+
+<div class="col-md-4"> </div>
+<div class="col-md-4"> 
+
 	<div id="map">
 		<!-- Replace the value of the key parameter with your own API key. -->
 	</div>
-
+</div>
 	<div id="barInfo">
 		<div class="fb-share-button" data-href="http://localhost:8080/citypulse/login" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcitypulse%2Flogin&amp;src=sdkpreparse">Share</a></div>
 		<p id="barName"></p>
@@ -161,7 +172,7 @@ table, th, td {
 		<p id="barPhone"></p>
 	</div>
 	
-	
+	<div class="col-md-4">
 	
 	<!--VOTING FORM  -->
 <div class="voteForm">
@@ -196,7 +207,12 @@ table, th, td {
 		<button type="submit">Raaate IT!!!</button>
 		
 	</form>
+	</div>
+	<!--bootstrappy -->
+	</div>
 </div>
+</div>
+
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=<%=GlobalVariables.DISPLAY_MAP_JS_KEY%>&libraries=places&callback=initMap"
 		script defer></script>
@@ -351,9 +367,11 @@ table, th, td {
 								infowindow.open(map, this);								
 							});
 		}
+		
 	</script>
-	<!-- <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-        <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+	<!--BOOTSTRAP JARS  -->
+ <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+        <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
 

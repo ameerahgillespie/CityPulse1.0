@@ -49,7 +49,8 @@ function setCenterMap(geocoder, resultsMap) {
 </head>
 <body>
 <div class = "container">
-
+<h1>Cool Main Title</h1>
+<h2>Subtitle goes here</h2>
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -120,7 +121,7 @@ function setCenterMap(geocoder, resultsMap) {
     });
   }
 </script>
-
+ <div class="FB">
 <div id="loginButton" class="fb-login-button" data-max-rows="1"
 	scope="public_profile,email,user_friends"
 	onlogin="checkLoginState();"
@@ -141,7 +142,7 @@ function setCenterMap(geocoder, resultsMap) {
 	<form:input path="longitude" id="formLongitude" type="text" readonly="true" hidden="true"/><br>
 	<form:input path="zoom" id="formZoom" type="text" readonly="true" hidden="true"/><br>
 </form:form>
-
+</div>
 <p id="currentLocation"></p>
 
 <div id="map"></div>
