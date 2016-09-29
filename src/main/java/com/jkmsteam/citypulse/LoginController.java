@@ -24,6 +24,7 @@ public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String begin(
 			@CookieValue(value = "lat", defaultValue = "42.335376") Double lat,

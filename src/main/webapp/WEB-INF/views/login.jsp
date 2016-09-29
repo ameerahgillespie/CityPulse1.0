@@ -48,6 +48,8 @@ function setCenterMap(geocoder, resultsMap) {
 
 </head>
 <body>
+<div class = "container">
+
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -146,7 +148,6 @@ function setCenterMap(geocoder, resultsMap) {
    <script async defer
      src="https://maps.googleapis.com/maps/api/js?key=<%=GlobalVariables.DISPLAY_MAP_JS_KEY%>&callback=initMap">
    </script>
-
-
+</div>
 </body>
 </html>

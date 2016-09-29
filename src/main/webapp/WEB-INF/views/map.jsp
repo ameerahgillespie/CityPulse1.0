@@ -8,25 +8,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
+
+
+<!-- STYLE BRACKETS WERE HERE -->
+
 <style>
-html, body {
+/*  html, body {
 	height: 100%;
 	margin: 0;
-	padding: 0;
-}
+	padding: 0;  */
+/* }
 
-#map {
+ #map {
 	top: 10px;
 	left: 10px;
 	height: 97%;
 	width: 1000px;
-}
+}  */
 
-#voteForm {
-	position: absolute;
+.voteForm {
+display: inline-block;
+float: right;
+width: 25%;
+padding: 13px;
+
+	/* position: absolute;
 	top: 280px;
 	left: 1030px;
-	width: 310px;
+	width: 310px; */
 }
 
 #barInfo {
@@ -35,19 +44,101 @@ html, body {
 	left: 1030px;
 	width: 310px;
 }
+
+
+#map {
+position: absolute;
+height: 80vh;
+width: 65vw;
+margin-left: auto;
+margin-right: auto;
+z-index: -1;
+right: 400px; 
+}
+
+/*  ADD BUTTON HERE*/
+/* button {
+border-radius: 5px;
+border: none;
+background-color: #3A3A3A;
+margin: 0 4px 10px 8px;
+height: 40px;
+width: 50px;
+box-shadow: 0px 3px 0px 0px #222121;
+}
+ */
+
+
+/* 
+#map {
+	position: absolute;
+	top: 10px;
+	left: 300px;
+	width: 1000px;
+	height: 1000px;
+} */
+
+ h1 {
+text-align: center;
+font-weight: 700;
+text-transform: uppercase;
+margin-top: 0;
+margin-bottom: 0;
+font-size: 30px;
+}
+
+
+h2 {
+font-weight: 300;
+text-align: center;
+font-size: 20px;
+margin-bottom: 50px;
+}
+
+body {
+font-family: 'Raleway', sans-serif;
+font-weight: 400;
+color: #222;
+background-color: #f4f5f5;
+position: relative;
+right: 0;
+margin: 0;
+}
+
+label {
+	display: block;
+	width: 200px;
+}
+
+table, th, td {
+	border: 1px solid;
+}
+
+.submit {
+	margin: 10px 0;
+}
+
 </style>
+
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,500" rel="stylesheet">
 <title>Pick Your Poison</title>
 <spring:url value="/resources/core/css/bootstrap.min.css"
 	var="bootstrapCss" />
 <link href="${bootstrapCss}" rel="stylesheet" />
 <link href="${coreCss}" rel="stylesheet" />
-<script src="<c:url value="/resources/js/jQuery.js" />"></script>
-
+<%-- <script src="<c:url value="/resources/js/jQuery.js" />"></script>
+        <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+                rel="stylesheet"> --%>
 </head>
+
 <body>
+
+<h1> Welcome to City Pulse</h1>
+<h2>some cool short subtitle here</h2>
+
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -70,11 +161,16 @@ html, body {
 		<p id="barPhone"></p>
 	</div>
 	
+	
+	
+	<!--VOTING FORM  -->
+<div class="voteForm">
 	<form action="vote" id="voteForm" method="post">
 		<label id="placeName"></label><br>
 		
 		<input type="text" id="currentUser" name="userId" hidden="true">
 		<input type="text" id="currentPlace" name="placeId" hidden="true">
+		<br></br>
 		<label>What's your overall feeling about this place?<br>
 			<input type="radio" name="overallRate" value="dead"> Dead<br>
 			<input type="radio" name="overallRate" value="justRight" checked>
@@ -84,7 +180,7 @@ html, body {
 		<p>Tell us about your experience with this bar:</p>
 		<input type="checkbox" name="coverCharge" value="1"> This
 		place has cover charge<br> <input type="checkbox" name="crowded"
-			value="1"> This place is crowded<br> <input
+			value="1"> Too many dudes!<br> <input
 			type="checkbox" name="expensive" value="1"> Prices are too
 		high!<br> <input type="checkbox" name="loud" value="1"> I
 		can't hear my thoughts!<br> <input type="checkbox"
@@ -96,10 +192,11 @@ html, body {
 			type="text" id="latForm" name="lat" hidden="true"> <input
 			type="text" id="lngForm" name="lng" hidden="true"> <input
 			type="text" id="zoomForm" name="zoom" hidden="true">
-
+<br></br>
 		<button type="submit">Raaate IT!!!</button>
+		
 	</form>
-
+</div>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=<%=GlobalVariables.DISPLAY_MAP_JS_KEY%>&libraries=places&callback=initMap"
 		script defer></script>
@@ -139,7 +236,8 @@ html, body {
 						scale : 5
 					},
 					draggable : true,
-					map : map
+					map : map,
+					title: "You are here"
 				});
 		      
 				var infoWindowLoc = new google.maps.InfoWindow({map: map});
@@ -162,13 +260,19 @@ html, body {
 				}
 			}
 		}
-				
-		function createMarker(place) {
+
+		function createMarker(place) {				
+		    var pinColor = "b8b8b8";
+		    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+		    new google.maps.Size(21, 34),
+	        new google.maps.Point(0,0),
+	        new google.maps.Point(10, 34));
+
 			var placeLoc = place.geometry.location;
 			var marker = new google.maps.Marker({
 				map : map,
-				position : place.geometry.location
-			
+				position : place.geometry.location,
+				icon: pinImage
 			});
 						
 			var deadRate = 0;
@@ -193,12 +297,35 @@ html, body {
 			if (smallGroupsSet[place.id]) smallGroupsRate = smallGroupsSet[place.id];
 			if (safePlaceSet[place.id]) safePlaceRate = safePlaceSet[place.id];
 			if (goodParkingSet[place.id]) goodParkingRate = goodParkingSet[place.id];
+			
+			if(deadRate > justRightRate && deadRate > jumpingRate) {
+				var pinColorD = "737aff";
+			    var pinImageD = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorD,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageD);
+			} else if(justRightRate > deadRate && justRightRate > jumpingRate) {
+				var pinColorR = "ff3030";
+			    var pinImageR = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorR,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageR);				
+			} else if(jumpingRate > deadRate && jumpingRate > justRightRate) {
+				var pinColorJ = "ff0000";
+			    var pinImageJ = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorJ,
+				    new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0),
+			        new google.maps.Point(10, 34));				
+				marker.setIcon(pinImageJ);
+				marker.setAnimation(google.maps.Animation.BOUNCE);			}
 //console.log(dataRating);
 			var infoContent = place.name + "<br>" 
 					+ "Rating of this place:<br>"
 					+ "Dead: " + deadRate + "  Just Right: " + justRightRate + "  Jumping Jumping!: " + jumpingRate + "<br>"
 					+ "Has cover charge: " + coverChargeRate + "<br>"
-					+ "It's too crowded: " + crowdedRate + "<br>"
+					+ "Too many dudes!: " + crowdedRate + "<br>"
 					+ "Prices are way too high!: " + expensiveRate + "<br>"
 					+ "I can't hear my thoughts!: " + loudRate + "<br>"
 					+ "Good for big groups: " + bigGroupsRate + "<br>"
@@ -225,5 +352,17 @@ html, body {
 							});
 		}
 	</script>
+	<!-- <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+        <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
