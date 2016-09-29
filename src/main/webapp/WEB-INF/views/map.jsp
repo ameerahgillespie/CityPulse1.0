@@ -31,7 +31,7 @@ display: inline-block;
 float: right;
 width: 25%;
 padding: 13px;
-
+color: #ffffff;
 	/* position: absolute;
 	top: 280px;
 	left: 1030px;
@@ -46,6 +46,17 @@ padding: 13px;
 }
 
 
+#container {
+width: 960px; 
+max-width: 90%;
+position: relative;
+left: 50%;
+margin-left: -480px;
+line-height: 1.4em;
+}
+
+
+
 #map {
 position: absolute;
 height: 80vh;
@@ -57,16 +68,27 @@ right: 400px;
 }
 
 /*  ADD BUTTON HERE*/
-/* button {
-border-radius: 5px;
+ button {
+/* border-radius: 5px;
 border: none;
 background-color: #3A3A3A;
 margin: 0 4px 10px 8px;
 height: 40px;
 width: 50px;
-box-shadow: 0px 3px 0px 0px #222121;
+box-shadow: 0px 3px 0px 0px #222121; */
+
+background-color: #ff0000; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+
 }
- */
+ 
 
 
 /* 
@@ -84,22 +106,24 @@ font-weight: 700;
 text-transform: uppercase;
 margin-top: 0;
 margin-bottom: 0;
-font-size: 30px;
+font-size: 80px;
+color: #ffffff;
 }
 
 
 h2 {
 font-weight: 300;
 text-align: center;
-font-size: 20px;
-margin-bottom: 50px;
+font-size: 50px;
+margin-bottom: 70px;
+color: #ffffff;
 }
 
 body {
 font-family: 'Raleway', sans-serif;
-font-weight: 400;
+font-weight: 200;
 color: #222;
-background-color: #f4f5f5;
+background-color: #37474F;
 position: relative;
 right: 0;
 margin: 0;
@@ -124,7 +148,7 @@ table, th, td {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500" rel="stylesheet">
-<title>Pick Your Poison</title>
+<title>Pick A Bar</title>
 <spring:url value="/resources/core/css/bootstrap.min.css"
 	var="bootstrapCss" />
 <link href="${bootstrapCss}" rel="stylesheet" />
@@ -142,9 +166,11 @@ table, th, td {
 <div class="container">
 <div class="row">
 
+<br></br>
+<br></br>
+<h1>Welcome to city<span style="color:red">PULSE</span></h1>
 
-<h1> Welcome to City Pulse</h1>
-<h2>some cool short subtitle here</h2>
+<h2>Too many dudes?<span style="color:red"> Rate it.</span></h2>
 
 
 <div id="fb-root"></div>
@@ -161,13 +187,19 @@ table, th, td {
 <div class="col-md-4"> </div>
 <div class="col-md-4"> 
 
-	<div id="map">
+	<div id="map" class= "img-responsive">
 		<!-- Replace the value of the key parameter with your own API key. -->
 	</div>
 </div>
 	<div id="barInfo">
-		<div class="fb-share-button" data-href="http://localhost:8080/citypulse/login" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcitypulse%2Flogin&amp;src=sdkpreparse">Share</a></div>
-		<p id="barName"></p>
+	
+	
+	<!-- SHARE BUTTON!!! -->
+<!-- 		<div class="fb-share-button" data-href="http://localhost:8080/citypulse/login" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcitypulse%2Flogin&amp;src=sdkpreparse">Share</a></div>
+ -->	
+ 
+ 
+ 	<p id="barName"></p>
 		<p id="barAddress"></p>
 		<p id="barPhone"></p>
 	</div>
@@ -175,7 +207,7 @@ table, th, td {
 	<div class="col-md-4">
 	
 	<!--VOTING FORM  -->
-<div class="voteForm">
+<div class="voteForm img-responsive">
 	<form action="vote" id="voteForm" method="post">
 		<label id="placeName"></label><br>
 		
@@ -183,6 +215,7 @@ table, th, td {
 		<input type="text" id="currentPlace" name="placeId" hidden="true">
 		<br></br>
 		<label>What's your overall feeling about this place?<br>
+		<br></br>
 			<input type="radio" name="overallRate" value="dead"> Dead<br>
 			<input type="radio" name="overallRate" value="justRight" checked>
 			Just Right<br> <input type="radio" name="overallRate"
@@ -204,7 +237,7 @@ table, th, td {
 			type="text" id="lngForm" name="lng" hidden="true"> <input
 			type="text" id="zoomForm" name="zoom" hidden="true">
 <br></br>
-		<button type="submit">Raaate IT!!!</button>
+		<button type="submit">Rate It!</button>
 		
 	</form>
 	</div>

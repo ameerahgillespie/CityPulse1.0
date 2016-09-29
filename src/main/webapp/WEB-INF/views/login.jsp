@@ -49,8 +49,13 @@ function setCenterMap(geocoder, resultsMap) {
 </head>
 <body>
 <div class = "container">
-<h1>Cool Main Title</h1>
-<h2>Subtitle goes here</h2>
+<!-- <div class="topHeader" style="width:100%">
+<img src = "./resources/images/pulselogo.png" style="margin: 0% auto"> -->/
+<br></br>
+<br></br>
+<h1>city<span style="color:red">PULSE</span></h1>
+<h2>Select a location.</h2>
+</div>
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
